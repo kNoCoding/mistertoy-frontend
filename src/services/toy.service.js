@@ -27,26 +27,29 @@ export const toyService = {
 }
 
 function query(filterBy = {}) {
-    // return httpService.get(BASE_URL, filterBy)
-    return storageService.query(TOY_KEY)
+    return httpService.get(BASE_URL, filterBy).then((res) => {
+        console.log('THE FRONT CONNECTED TO THE BACK!\nquery:\n', res)
+        return res
+    })
+    // return storageService.query(TOY_KEY)
 }
 
 function getById(toyId) {
-    // return httpService.get(BASE_URL + toyId)
+    return httpService.get(BASE_URL + toyId)
     return storageService.get(TOY_KEY, toyId)
 }
 
 function remove(toyId) {
-    // return httpService.delete(BASE_URL + toyId)
+    return httpService.delete(BASE_URL + toyId)
     return storageService.remove(TOY_KEY, toyId)
 }
 
 function save(toy) {
     if (toy._id) {
-        // return httpService.put(BASE_URL, toy)
+        return httpService.put(BASE_URL, toy)
         return storageService.put(TOY_KEY, toy)
     } else {
-        // return httpService.post(BASE_URL, toy)
+        return httpService.post(BASE_URL, toy)
         return storageService.post(TOY_KEY, toy)
     }
 }
