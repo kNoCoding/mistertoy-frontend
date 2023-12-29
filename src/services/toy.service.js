@@ -26,13 +26,20 @@ export const toyService = {
     getDefaultFilter
 }
 
-function query(filterBy = {}) {
-    return httpService.get(BASE_URL, filterBy).then((res) => {
-        console.log('THE FRONT CONNECTED TO THE BACK!\nquery:\n', res)
-        return res
-    })
+async function query(filterBy = {}) {
+    var toys = await httpService.get(BASE_URL, filterBy)
+    console.log('FRONT connected to BACK!\nquery:\n', toys)
+    return toys
+
     // return storageService.query(TOY_KEY)
 }
+// function query(filterBy = {}) {
+//     return httpService.get(BASE_URL, filterBy).then((res) => {
+//         console.log('THE FRONT CONNECTED TO THE BACK!\nquery:\n', res)
+//         return res
+//     })
+//     // return storageService.query(TOY_KEY)
+// }
 
 function getById(toyId) {
     return httpService.get(BASE_URL + toyId)
